@@ -74,9 +74,7 @@ header {
 .add-item {
   background-color: var(--card-bg);
   border-radius: $rounded-border;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  @include flexbox;
 
   input {
     flex: 1;
@@ -107,6 +105,12 @@ span.circle {
   border: 2px solid var(--check-color);
   border-radius: 50%;
   margin-left: 0.5rem;
+}
+
+div.item-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .list {
@@ -144,12 +148,9 @@ li {
   color: var(--plus-color);
   padding: $card-padding;
   border-bottom: 1px solid rgb(205, 197, 197);
-  margin-left: 0.4rem;
-  @include flexbox;
+  margin-left: -0.7rem;
 
-  .activity {
-    flex: 1;
-  }
+  @include flexbox();
 
   .circle img {
     background: $CheckBackground;
@@ -157,5 +158,17 @@ li {
     height: 100%;
     width: 100%;
     padding: 0.2rem;
+  }
+
+  button img {
+    width: 1rem;
+  }
+
+  .circle img,
+  button img {
+    &:hover {
+      transform: $pop;
+      cursor: pointer;
+    }
   }
 }
