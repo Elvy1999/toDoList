@@ -10,6 +10,10 @@ button {
   user-select: none;
 }
 
+ul {
+  list-style-type: none;
+}
+
 button {
   border: none;
   background-color: transparent;
@@ -81,16 +85,8 @@ header {
     text-align: center;
     font-size: $f-size;
     color: var(--plus-color);
-    padding: 0.7rem;
+    padding: $card-padding;
     outline: none;
-  }
-
-  span {
-    width: 1.5rem;
-    height: 1.5rem;
-    border: 2px solid var(--check-color);
-    border-radius: 50%;
-    margin-left: 0.5rem;
   }
 
   #add-btn {
@@ -102,5 +98,64 @@ header {
     &:hover {
       transform: $pop;
     }
+  }
+}
+
+span.circle {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--check-color);
+  border-radius: 50%;
+  margin-left: 0.5rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-bg);
+}
+
+.list-info {
+  @include flexbox();
+  padding: 0.9rem;
+  border-top: 1px solid rgb(205, 197, 197);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+  div,
+  button {
+    color: var(--inactive-color);
+    font-size: 0.8rem;
+    &:hover {
+      color: var(--hover-color);
+      transform: $pop;
+    }
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+.items {
+}
+
+li {
+  font-size: $f-size;
+  color: var(--plus-color);
+  padding: $card-padding;
+  border-bottom: 1px solid rgb(205, 197, 197);
+  margin-left: 0.4rem;
+  @include flexbox;
+
+  .activity {
+    flex: 1;
+  }
+
+  .circle img {
+    background: $CheckBackground;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    padding: 0.2rem;
   }
 }

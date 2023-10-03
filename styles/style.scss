@@ -9,6 +9,7 @@ $normal: 400;
 $bold: 700;
 $rounded-border: 0.25rem;
 $pop: scale(1.1);
+$card-padding: 0.7rem;
 
 $CheckBackground: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 $active: hsl(220, 98%, 61%);
@@ -30,7 +31,7 @@ $active: hsl(220, 98%, 61%);
 //light theme
 :root[data-theme="light"] {
   --bg-color: #f6f6f8;
-  --card-bg: hsl(0, 0%, 98%);
+  --card-bg: white;
   --text-color: hsl(0, 0%, 26%);
   --inactive-color: hsl(236, 9%, 61%);
   --active-color: hsl(220, 98%, 61%);
