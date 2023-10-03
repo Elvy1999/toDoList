@@ -112,6 +112,7 @@ header img:hover {
   border: none;
   text-align: center;
   font-size: 1.125rem;
+  color: var(--plus-color);
   padding: 0.7rem;
   outline: none;
 }
