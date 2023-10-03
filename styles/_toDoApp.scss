@@ -1,4 +1,105 @@
-.fuck {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: $Jose;
-  font-size: 3rem;
+}
+
+a,
+button {
+  user-select: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+}
+
+body {
+  background-image: var(--bg-img-mobile);
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: contain;
+  background-color: var(--bg-color);
+  width: 100vw;
+  height: 100vh;
+  @include flexcenter;
+}
+
+section.wrapper {
+  height: 90vh;
+  width: 90vw;
+  @include flexbox(flex-start, column);
+
+  > * {
+    width: 100%;
+    border-radius: $rounded-border;
+    margin-bottom: 1rem;
+  }
+  > *:not(header):not(p) {
+    //look at this later
+    background-color: var(--card-bg);
+  }
+}
+
+header {
+  @include flexbox;
+
+  h1 {
+    color: white;
+    font-size: 2rem;
+    letter-spacing: 0.5rem;
+    font-weight: var(--bold);
+  }
+
+  button {
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+  }
+
+  img {
+    width: 2.2rem;
+
+    &:hover {
+      transform: $pop;
+    }
+  }
+}
+
+.add-item {
+  background-color: var(--card-bg);
+  border-radius: $rounded-border;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  input {
+    flex: 1;
+    background-color: var(--card-bg);
+    border: none;
+    text-align: center;
+    font-size: $f-size;
+    padding: 0.7rem;
+    outline: none;
+  }
+
+  span {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid var(--check-color);
+    border-radius: 50%;
+    margin-left: 0.5rem;
+  }
+
+  #add-btn {
+    color: var(--plus-color);
+    font-size: 2.5rem;
+    padding-right: 1rem;
+    cursor: pointer;
+
+    &:hover {
+      transform: $pop;
+    }
+  }
 }

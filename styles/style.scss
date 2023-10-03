@@ -1,27 +1,46 @@
-// Variables
-
 // ### Primary
 $BrightBlue: hsl(220, 98%, 61%);
-$CheckBackground: linear-gradient hsl(192, 100%, 67%) to hsl(280, 87%, 65%);
+$CheckBackground: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
 
-//Light theme
-$VeryLightGray: hsl(0, 0%, 98%);
-$VeryLightGrayishBlue: hsl(236, 33%, 92%);
-$LightGrayishBlue: hsl(233, 11%, 84%);
-$DarkGrayishBlue: hsl(236, 9%, 61%);
-$VeryDarkGrayishBlue: hsl(235, 19%, 35%);
-
-//Dark theme
-$VeryDarkBlue: hsl(235, 21%, 11%);
-$VeryDarkDesaturatedBlue: hsl(235, 24%, 19%);
-$LightGrayishBlue: hsl(234, 39%, 85%);
-$LightGrayishBlue-hover: hsl(236, 33%, 92%);
-$DarkGrayishBlue: hsl(234, 11%, 52%);
-$VeryDarkGrayishBlue: hsl(233, 14%, 35%);
-$VeryDarkGrayishBlue: hsl(237, 14%, 26%);
-
-//Fonts
+//Font variables
 $Jose: "Josefin Sans", sans-serif;
+$f-size: 1.125rem;
+$normal: 400;
+$bold: 700;
+$rounded-border: 0.25rem;
+$pop: scale(1.1);
 
-@import "general";
+$CheckBackground: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+$active: hsl(220, 98%, 61%);
+
+//dark theme
+:root[data-theme="dark"] {
+  --bg-color: #171723;
+  --card-bg: hsl(235, 24%, 19%);
+  --text-color: hsl(0, 0%, 73%);
+  --inactive-color: hsl(234, 11%, 52%);
+  --active-color: hsl(234, 39%, 85%);
+  --hover-color: hsl(236, 33%, 92%);
+  --check-color: hsl(233, 14%, 35%);
+  --shadow-color: hsla(0, 0%, 7%, 0.877);
+  --plus-color: white;
+  --bg-img-mobile: url(./../assets/bg-mobile-dark.jpg);
+  --bg-img-desktop: url(./../assets/bg-desktop-dark.jpg);
+}
+//light theme
+:root[data-theme="light"] {
+  --bg-color: #f6f6f8;
+  --card-bg: hsl(0, 0%, 98%);
+  --text-color: hsl(0, 0%, 26%);
+  --inactive-color: hsl(236, 9%, 61%);
+  --active-color: hsl(220, 98%, 61%);
+  --hover-color: hsl(235, 19%, 35%);
+  --check-color: hsl(233, 11%, 84%);
+  --shadow-color: hsla(240, 5%, 85%, 0.603);
+  --plus-color: black;
+  --bg-img-mobile: url(./../assets/bg-mobile-light.jpg);
+  --bg-img-desktop: url(./../assets/bg-desktop-light.jpg);
+}
+
+@import "mixins";
 @import "toDoApp";
