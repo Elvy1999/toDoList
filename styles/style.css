@@ -73,7 +73,7 @@ section.wrapper {
 section.wrapper > * {
   width: 100%;
   border-radius: 0.25rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 section.wrapper > *:not(header):not(p) {
   background-color: var(--card-bg);
@@ -116,7 +116,7 @@ header img:hover {
   background-color: var(--card-bg);
   border: none;
   text-align: center;
-  font-size: 1.125rem;
+  font-size: 0.95rem;
   color: var(--plus-color);
   padding: 0.7rem;
   outline: none;
@@ -175,11 +175,10 @@ div.item-wrapper {
 }
 
 li {
-  font-size: 1.125rem;
+  font-size: 0.95rem;
   color: var(--plus-color);
   padding: 0.7rem;
   border-bottom: 1px solid rgb(205, 197, 197);
-  margin-left: -0.7rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -198,5 +197,24 @@ li button img {
 li .circle img:hover,
 li button img:hover {
   transform: scale(1.1);
+  cursor: pointer;
+}
+
+.view-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+.view-options button {
+  font-size: 1.125rem;
+  color: var(--inactive-color);
+  font-weight: 700;
+}
+.view-options button:hover {
+  transform: scale(1.1);
+  color: var(--hover-color);
   cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

@@ -21,13 +21,12 @@
           <img src="assets/icon-moon.svg" alt="moon icon" />
         </button>
       </header>
-      <div class="add-item">
+      <section class="add-item">
         <span class="circle"></span>
         <input type="text" id="ToDoItem" placeholder="Create a new todo..." />
-
         <button id="add-btn">+</button>
-      </div>
-      <div class="list">
+      </section>
+      <section class="list">
         <ul class="items">
           <li>
             <span class="circle"><img src="assets/icon-check.svg" alt="check image" /></span>
@@ -41,15 +40,30 @@
           </li>
           <li>
             <span class="circle"></span>
-            <div id="todo">Finish math homework</div>
+            <div class="todo">Finish math homework</div>
+            <button class="remove"><img src="assets/icon-cross.svg" alt="x mark image" /></button>
+          </li>
+          <li>
+            <span class="circle"><img src="assets/icon-check.svg" alt="check image" /></span>
+            <div class="todo">Smoke some crack</div>
+            <button class="remove"><img src="assets/icon-cross.svg" alt="x mark image" /></button>
+          </li>
+          <li>
+            <span class="circle"><img src="assets/icon-check.svg" alt="check image" /></span>
+            <div class="todo">Read Atomic habits</div>
             <button class="remove"><img src="assets/icon-cross.svg" alt="x mark image" /></button>
           </li>
         </ul>
         <div class="list-info">
-          <div><span id="items-left">5</span> items left</div>
+          <div><span id="items-left">5</span>items left</div>
           <button id="clear-completed">Clear Completed</button>
         </div>
-      </div>
+      </section>
+      <section class="view-options">
+        <button id="all">All</button>
+        <button id="active">Active</button>
+        <button id="Completed">Completed</button>
+      </section>
     </section>
   </body>
 </html>

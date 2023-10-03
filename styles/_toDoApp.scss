@@ -38,7 +38,7 @@ section.wrapper {
   > * {
     width: 100%;
     border-radius: $rounded-border;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
   > *:not(header):not(p) {
     //look at this later
@@ -81,7 +81,7 @@ header {
     background-color: var(--card-bg);
     border: none;
     text-align: center;
-    font-size: $f-size;
+    font-size: $t-size;
     color: var(--plus-color);
     padding: $card-padding;
     outline: none;
@@ -139,16 +139,11 @@ div.item-wrapper {
     cursor: pointer;
   }
 }
-
-.items {
-}
-
 li {
-  font-size: $f-size;
+  font-size: $t-size;
   color: var(--plus-color);
   padding: $card-padding;
   border-bottom: 1px solid rgb(205, 197, 197);
-  margin-left: -0.7rem;
 
   @include flexbox();
 
@@ -168,6 +163,25 @@ li {
   button img {
     &:hover {
       transform: $pop;
+      cursor: pointer;
+    }
+  }
+}
+
+.view-options {
+  @include flexcenter;
+  gap: 1rem;
+  padding: $card-padding;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+
+  button {
+    font-size: $f-size;
+    color: var(--inactive-color);
+    font-weight: $bold;
+
+    &:hover {
+      transform: $pop;
+      color: var(--hover-color);
       cursor: pointer;
     }
   }
