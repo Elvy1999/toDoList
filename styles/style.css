@@ -50,6 +50,9 @@ button {
 }
 
 body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-image: var(--bg-img-mobile);
   background-repeat: no-repeat;
   background-position: top left;
@@ -57,9 +60,7 @@ body {
   background-color: var(--bg-color);
   width: 100vw;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
 }
 
 section.wrapper {
@@ -251,4 +252,13 @@ li button img:hover {
 
 .showDisplay {
   display: none;
+}
+
+footer {
+  text-align: center;
+  color: var(--plus-color);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }/*# sourceMappingURL=style.css.map */
