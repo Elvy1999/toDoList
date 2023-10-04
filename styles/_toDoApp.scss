@@ -140,6 +140,7 @@ div.item-wrapper {
   }
 }
 li {
+  transition: opacity 0.3s ease-in-out;
   font-size: $t-size;
   color: var(--plus-color);
   padding: $card-padding;
@@ -187,6 +188,17 @@ li {
     }
   }
 }
-.list .items li {
-  transition: opacity 0.3s ease-in-out;
+
+.emptyList {
+  @include flexcenter;
+  transition: opacity 0.5s ease;
+  padding: 4rem;
+  background-color: var(--card-bg);
+  color: var(--plus-color);
+  border-radius: $rounded-border;
+  font-size: 1.2rem;
+}
+
+.showDisplay {
+  display: none;
 }

@@ -4,6 +4,7 @@ const themeBtn = document.querySelector(".toggle-btn");
 const todoItems = document.querySelector(".items");
 const todoInput = document.querySelector("#ToDoItem");
 const addBtn = document.getElementById("add-btn");
+const emptyList = document.querySelector(".emptyList");
 
 //Functions
 function toggleThemes(e) {
@@ -32,6 +33,7 @@ function removeTodo(e) {
   if (todoItemRemoveBtn) {
     deleteItem(todoItemRemoveBtn.parentElement);
   }
+  toggleEmptyDisplay();
 }
 
 // toggle checkmark for list item
@@ -69,7 +71,20 @@ function addTodo(e) {
     removeBtn.appendChild(crossImg);
     newTodoItem.appendChild(removeBtn);
     todoItems.appendChild(newTodoItem);
+    toggleEmptyDisplay();
     todoInput.value = ""; // clears the input for the todo item
+  }
+}
+
+//togles emptylist display if the todo list is empty
+function toggleEmptyDisplay() {
+  console.log(todoItems.childElementCount);
+  console.log(todoItems);
+  if (todoItems.childElementCount - 1 == 0) {
+    console.log("empty List");
+    emptyList.classList.toggle("showDisplay");
+  } else if (!emptyList.classList.contains("showDisplay") && todoItems.childElementCount == 1) {
+    emptyList.classList.toggle("showDisplay");
   }
 }
 
