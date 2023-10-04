@@ -2,6 +2,8 @@
 const html = document.documentElement;
 const themeBtn = document.querySelector(".toggle-btn");
 const todoItems = document.querySelector(".items");
+const todoInput = document.querySelector("#ToDoItem");
+const addBtn = document.getElementById("add-btn");
 
 //Functions
 function toggleThemes(e) {
@@ -45,8 +47,35 @@ function toggleComplete(e) {
     }
   }
 }
+// Takes input from the user to create a todo item, which is then added to the todo item list
+function addTodo(e) {
+  if (e.key === "Enter" || e.keyCode === 13 || e.target.id == "add-btn") {
+    let newTodoItem = document.createElement("li");
+    let circle = document.createElement("span");
+    circle.classList.add("circle");
+    let checkImage = document.createElement("img");
+    checkImage.src = "assets/icon-check.svg";
+    checkImage.style.display = "none";
+    circle.appendChild(checkImage);
+    newTodoItem.appendChild(circle);
+    let todo = document.createElement("div");
+    todo.classList.add("todo");
+    todo.innerText = todoInput.value;
+    newTodoItem.appendChild(todo);
+    let removeBtn = document.createElement("button");
+    removeBtn.classList.add("remove");
+    let crossImg = document.createElement("img");
+    crossImg.src = "assets/icon-cross.svg";
+    removeBtn.appendChild(crossImg);
+    newTodoItem.appendChild(removeBtn);
+    todoItems.appendChild(newTodoItem);
+    todoInput.value = ""; // clears the input for the todo item
+  }
+}
 
 //Event Listeners
 themeBtn.addEventListener("click", toggleThemes);
 todoItems.addEventListener("click", toggleComplete);
 todoItems.addEventListener("click", removeTodo);
+todoInput.addEventListener("keydown", addTodo);
+addBtn.addEventListener("click", addTodo);
