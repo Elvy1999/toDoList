@@ -48,6 +48,7 @@ function toggleComplete(e) {
     } else {
       checkbtn.children[0].style.display = "inline";
     }
+    checkbtn.parentElement.classList.toggle("strike-todo");
     console.log(checkbtn.children[0]);
   }
 }

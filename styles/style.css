@@ -75,9 +75,6 @@ section.wrapper > * {
   border-radius: 0.25rem;
   margin-bottom: 1.5rem;
 }
-section.wrapper > *:not(header):not(p) {
-  background-color: var(--card-bg);
-}
 
 header {
   display: flex;
@@ -116,7 +113,7 @@ header img:hover {
   background-color: var(--card-bg);
   border: none;
   text-align: center;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--plus-color);
   padding: 0.7rem;
   outline: none;
@@ -134,7 +131,7 @@ header img:hover {
 span.circle {
   width: 1.5rem;
   height: 1.5rem;
-  border: 2px solid var(--check-color);
+  border: 1px solid var(--check-color);
   border-radius: 50%;
   margin-left: 0.5rem;
 }
@@ -176,15 +173,22 @@ div.item-wrapper {
 
 li {
   transition: opacity 0.3s ease-in-out;
-  font-size: 0.95rem;
-  color: var(--plus-color);
-  padding: 0.7rem;
-  border-bottom: 1px solid rgb(205, 197, 197);
-  cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
+  gap: 1rem;
+  font-size: 1rem;
+  color: var(--plus-color);
+  padding: 0.7rem;
+  border-bottom: 1px solid rgb(205, 197, 197);
+  cursor: pointer;
+}
+li .todo {
+  white-space: nowrap; /* Prevents the text from wrapping to the next line */
+  overflow: hidden; /* Hides any overflowed content */
+  text-overflow: ellipsis; /* Displays an ellipsis (...) when text overflows */
+  width: 87%;
 }
 li .circle img {
   background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
@@ -193,6 +197,9 @@ li .circle img {
   width: 100%;
   padding: 0.2rem;
 }
+li .circle {
+  margin-left: -0.2rem;
+}
 li button img {
   width: 1rem;
 }
@@ -200,6 +207,15 @@ li .circle img:hover,
 li button img:hover {
   transform: scale(1.1);
   cursor: pointer;
+}
+
+.strike-todo {
+  opacity: 0.5;
+}
+.strike-todo div.todo {
+  text-decoration: line-through;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
 }
 
 .view-options {
