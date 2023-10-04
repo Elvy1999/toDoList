@@ -59,12 +59,11 @@ body {
   background-size: contain;
   background-color: var(--bg-color);
   width: 100vw;
-  height: 100vh;
-  position: relative;
+  min-height: 100vh;
 }
 
 section.wrapper {
-  height: 90vh;
+  min-height: 90vh;
   width: 90vw;
   display: flex;
   justify-content: flex-start;
@@ -223,6 +222,7 @@ li button img:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
   gap: 1rem;
   padding: 0.7rem;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
@@ -258,7 +258,6 @@ footer {
   text-align: center;
   color: var(--plus-color);
   position: absolute;
-  bottom: 0;
-  width: 100%;
+  bottom: -80px;
   height: 2.5rem;
 }/*# sourceMappingURL=style.css.map */
