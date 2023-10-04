@@ -32,14 +32,15 @@ function removeTodo(e) {
   const todoItemRemoveBtn = e.target.closest(".remove");
   if (todoItemRemoveBtn) {
     deleteItem(todoItemRemoveBtn.parentElement);
+    toggleEmptyDisplay();
   }
-  toggleEmptyDisplay();
 }
 
 // toggle checkmark for list item
 function toggleComplete(e) {
   const checkbtn = e.target.closest(".circle");
   if (checkbtn) {
+    console.log(checkbtn);
     const computedStyle = window.getComputedStyle(checkbtn.children[0]);
     const displayValue = computedStyle.getPropertyValue("display");
     if (displayValue == "inline") {
@@ -47,11 +48,12 @@ function toggleComplete(e) {
     } else {
       checkbtn.children[0].style.display = "inline";
     }
+    console.log(checkbtn.children[0]);
   }
 }
 // Takes input from the user to create a todo item, which is then added to the todo item list
 function addTodo(e) {
-  if (e.key === "Enter" || e.keyCode === 13 || e.target.id == "add-btn") {
+  if ((e.key === "Enter" || e.keyCode === 13 || e.target.id == "add-btn") && todoInput.value != "") {
     let newTodoItem = document.createElement("li");
     let circle = document.createElement("span");
     circle.classList.add("circle");
@@ -76,14 +78,14 @@ function addTodo(e) {
   }
 }
 
-//togles emptylist display if the todo list is empty
+//toggles emptylist display depending on whether todolist is empty or not
 function toggleEmptyDisplay() {
-  console.log(todoItems.childElementCount);
-  console.log(todoItems);
   if (todoItems.childElementCount - 1 == 0) {
-    console.log("empty List");
+    console.log(todoItems.childElementCount);
+    console.log("bitch");
     emptyList.classList.toggle("showDisplay");
   } else if (!emptyList.classList.contains("showDisplay") && todoItems.childElementCount == 1) {
+    console.log("hello");
     emptyList.classList.toggle("showDisplay");
   }
 }
