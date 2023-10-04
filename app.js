@@ -1,10 +1,11 @@
 //Dom Elements
 const html = document.documentElement;
 const themeBtn = document.querySelector(".toggle-btn");
-const todoItems = document.querySelector(".items");
+const allTodoItems = document.querySelector(".all");
 const todoInput = document.querySelector("#ToDoItem");
 const addBtn = document.getElementById("add-btn");
 const emptyList = document.querySelector(".emptyList");
+const viewOptions = document.querySelector(".view-options");
 
 //Functions
 function toggleThemes(e) {
@@ -73,7 +74,7 @@ function addTodo(e) {
     crossImg.src = "assets/icon-cross.svg";
     removeBtn.appendChild(crossImg);
     newTodoItem.appendChild(removeBtn);
-    todoItems.appendChild(newTodoItem);
+    allTodoItems.appendChild(newTodoItem);
     toggleEmptyDisplay();
     todoInput.value = ""; // clears the input for the todo item
   }
@@ -81,19 +82,31 @@ function addTodo(e) {
 
 //toggles emptylist display depending on whether todolist is empty or not
 function toggleEmptyDisplay() {
-  if (todoItems.childElementCount - 1 == 0) {
-    console.log(todoItems.childElementCount);
-    console.log("bitch");
+  if (allTodoItems.childElementCount - 1 == 0 && emptyList.classList.contains("showDisplay")) {
+    console.log(allTodoItems.childElementCount);
     emptyList.classList.toggle("showDisplay");
-  } else if (!emptyList.classList.contains("showDisplay") && todoItems.childElementCount == 1) {
-    console.log("hello");
+    allTodoItems.style.display = "none";
+  } else if (!emptyList.classList.contains("showDisplay") && allTodoItems.childElementCount == 1) {
+    console.log("hello bitch");
     emptyList.classList.toggle("showDisplay");
+    allTodoItems.style.display = "inline";
   }
+}
+
+//switch todolist containers
+function switchContainers(e) {
+  const allContainers = document.querySelectorAll(".items");
+  allContainers.forEach((container) => {
+    container.classList.add("showDisplay");
+  });
+  const container = document.querySelector(`.${e.target.id}`);
+  container.classList.toggle("showDisplay");
 }
 
 //Event Listeners
 themeBtn.addEventListener("click", toggleThemes);
-todoItems.addEventListener("click", toggleComplete);
-todoItems.addEventListener("click", removeTodo);
+allTodoItems.addEventListener("click", toggleComplete);
+allTodoItems.addEventListener("click", removeTodo);
 todoInput.addEventListener("keydown", addTodo);
 addBtn.addEventListener("click", addTodo);
+viewOptions.addEventListener("click", switchContainers);

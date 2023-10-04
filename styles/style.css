@@ -172,6 +172,10 @@ div.item-wrapper {
   cursor: pointer;
 }
 
+ul.items {
+  min-height: 11.3rem;
+}
+
 li {
   transition: opacity 0.3s ease-in-out;
   display: flex;
@@ -244,7 +248,6 @@ li button img:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.5s ease;
   padding: 4rem;
   background-color: var(--card-bg);
   color: var(--plus-color);
@@ -260,6 +263,6 @@ footer {
   text-align: center;
   color: var(--plus-color);
   position: absolute;
-  bottom: -80px;
+  bottom: -100px;
   height: 2.5rem;
 }/*# sourceMappingURL=style.css.map */

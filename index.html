@@ -28,7 +28,21 @@
       </section>
       <section class="list">
         <div class="emptyList showDisplay">No items in list!</div>
-        <ul class="items">
+        <ul class="items active showDisplay">
+          <li>
+            <span class="circle"><img src="assets/icon-check.svg" alt="check image" /></span>
+            <div class="todo">Going to the park to smoke</div>
+            <button class="remove"><img src="assets/icon-cross.svg" alt="x mark image" /></button>
+          </li>
+        </ul>
+        <ul class="items completed showDisplay">
+          <li>
+            <span class="circle"><img src="assets/icon-check.svg" alt="check image" /></span>
+            <div class="todo">Going to the park drink</div>
+            <button class="remove"><img src="assets/icon-cross.svg" alt="x mark image" /></button>
+          </li>
+        </ul>
+        <ul class="items all">
           <li draggable="true">
             <span class="circle"><img src="assets/icon-check.svg" alt="check image" /></span>
             <div class="todo">Going to the park to smoke</div>
@@ -63,7 +77,7 @@
       <section class="view-options">
         <button id="all">All</button>
         <button id="active">Active</button>
-        <button id="Completed">Completed</button>
+        <button id="completed">Completed</button>
         <footer>Created by Elvy Decoo</footer>
       </section>
     </section>
