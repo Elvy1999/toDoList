@@ -209,6 +209,10 @@ li {
       cursor: pointer;
     }
   }
+
+  .active {
+    color: var(--active-color);
+  }
 }
 
 .emptyList {

@@ -2,6 +2,8 @@
 const html = document.documentElement;
 const themeBtn = document.querySelector(".toggle-btn");
 const allTodoItems = document.querySelector(".all");
+const activeTodoItems = document.querySelector(".active");
+const completedTodoItems = document.querySelector(".completed");
 const todoInput = document.querySelector("#ToDoItem");
 const addBtn = document.getElementById("add-btn");
 const emptyList = document.querySelector(".emptyList");
@@ -41,16 +43,16 @@ function removeTodo(e) {
 function toggleComplete(e) {
   const checkbtn = e.target.closest(".circle");
   if (checkbtn) {
-    console.log(checkbtn);
+    console.log(e.target.parentElement);
     const computedStyle = window.getComputedStyle(checkbtn.children[0]);
     const displayValue = computedStyle.getPropertyValue("display");
     if (displayValue == "inline") {
       checkbtn.children[0].style.display = "none";
     } else {
       checkbtn.children[0].style.display = "inline";
+      completedTodoItems.appendChild(e.target.parentElement);
     }
     checkbtn.parentElement.classList.toggle("strike-todo");
-    console.log(checkbtn.children[0]);
   }
 }
 // Takes input from the user to create a todo item, which is then added to the todo item list
@@ -91,14 +93,23 @@ function toggleEmptyDisplay() {
   }
 }
 
+//add active color to the container option selected
+function addActive(selection) {
+  const allBtns = viewOptions.querySelectorAll("button");
+  allBtns.forEach((btn) => {
+    btn.classList.remove("active");
+  });
+  selection.classList.add("active");
+}
+
 //switch todolist containers
 function switchContainers(e) {
-  if (emptyList.classList.contains("showDisplay")) {
-    console.log("In the condition");
+  if (emptyList.classList.contains("showDisplay") && e.target.tagName == "BUTTON") {
     const allContainers = document.querySelectorAll(".items");
     allContainers.forEach((container) => {
       container.classList.add("showDisplay");
     });
+    addActive(e.target);
     const container = document.querySelector(`.${e.target.id}`);
     container.classList.toggle("showDisplay");
   }
