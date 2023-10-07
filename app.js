@@ -124,45 +124,34 @@ function switchContainers(e) {
 }
 
 function containerSwitchTodoItems(container) {
+  const containers = [allTodoItems, activeTodoItems, completedTodoItems];
   switch (true) {
     case container.classList.contains("all"):
-      activeTodoItems.querySelectorAll("li").forEach((item) => allTodoItems.appendChild(item));
-      completedTodoItems.querySelectorAll("li").forEach((item) => allTodoItems.appendChild(item));
-      console.log(TodoModule.todoList);
+      containers
+        .slice(1)
+        .forEach((container) =>
+          container.querySelectorAll("li").forEach((item) => allTodoItems.appendChild(item))
+        );
       break;
     case container.classList.contains("active"):
       const activeIds = TodoModule.activeTodoIds();
-      allTodoItems.querySelectorAll("li").forEach((item) => {
-        if (activeIds.includes(Number(item.id))) {
-          console.log("activeIds", activeIds);
-          activeTodoItems.appendChild(item);
-        }
-      });
-      completedTodoItems.querySelectorAll("li").forEach((item) => {
-        if (activeIds.includes(Number(item.id))) {
-          console.log("activeIds", activeIds);
-          activeTodoItems.appendChild(item);
-        }
-        console.log(TodoModule.todoList);
-      });
+      containers.splice(1, 1); // Remove actvieTodoItems from the containers
+      containers.forEach((container) =>
+        container.querySelectorAll("li").forEach((item) => {
+          if (activeIds.includes(Number(item.id))) {
+            activeTodoItems.appendChild(item);
+          }
+        })
+      );
       break;
     case container.classList.contains("completed"):
       const completedIds = TodoModule.completedTodoIds();
-      allTodoItems.querySelectorAll("li").forEach((item) => {
-        if (completedIds.includes(Number(item.id))) {
-          console.log("CompletedIds", completedIds);
-          completedTodoItems.appendChild(item);
-        }
-        console.log(" ");
-        console.log(TodoModule.todoList);
-      });
-      activeTodoItems.querySelectorAll("li").forEach((item) => {
-        if (completedIds.includes(Number(item.id))) {
-          console.log("CompletedIds", completedIds);
-          completedTodoItems.appendChild(item);
-        }
-        console.log(" ");
-        console.log(TodoModule.todoList);
+      containers.slice(0, 2).forEach((container) => {
+        container.querySelectorAll("li").forEach((item) => {
+          if (completedIds.includes(Number(item.id))) {
+            completedTodoItems.appendChild(item);
+          }
+        });
       });
       break;
   }
