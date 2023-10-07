@@ -4,9 +4,10 @@ import { TodoModule } from "/TodoModule.js";
 //Dom Elements
 const html = document.documentElement;
 const themeBtn = document.querySelector(".toggle-btn");
+const allTodoContainers = document.querySelectorAll(".items");
 const allTodoItems = document.querySelector(".all");
-const activeTodoItems = document.querySelector(".active");
 const completedTodoItems = document.querySelector(".completed");
+const activeTodoItems = document.querySelector(".active");
 const todoInput = document.querySelector("#ToDoItem");
 const addBtn = document.getElementById("add-btn");
 const emptyList = document.querySelector(".emptyList");
@@ -122,8 +123,9 @@ function switchContainers(e) {
     container.classList.toggle("showDisplay");
   }
 }
-
+//switch the todoItems between containers
 function containerSwitchTodoItems(container) {
+  // list of the DOM elements for the todoItem containers
   const containers = [allTodoItems, activeTodoItems, completedTodoItems];
   switch (true) {
     case container.classList.contains("all"):
@@ -138,6 +140,7 @@ function containerSwitchTodoItems(container) {
       containers.splice(1, 1); // Remove actvieTodoItems from the containers
       containers.forEach((container) =>
         container.querySelectorAll("li").forEach((item) => {
+          // adds the todoItem to the container if its id is included in the array of activeIds
           if (activeIds.includes(Number(item.id))) {
             activeTodoItems.appendChild(item);
           }
@@ -146,8 +149,10 @@ function containerSwitchTodoItems(container) {
       break;
     case container.classList.contains("completed"):
       const completedIds = TodoModule.completedTodoIds();
+      //excludes the completedTodoItems DOM element from the loop
       containers.slice(0, 2).forEach((container) => {
         container.querySelectorAll("li").forEach((item) => {
+          // adds the todoItem to the container if its id is included in the array of completedIds
           if (completedIds.includes(Number(item.id))) {
             completedTodoItems.appendChild(item);
           }
@@ -159,12 +164,8 @@ function containerSwitchTodoItems(container) {
 
 //Event Listeners
 themeBtn.addEventListener("click", toggleThemes);
-allTodoItems.addEventListener("click", toggleComplete);
-activeTodoItems.addEventListener("click", toggleComplete);
-completedTodoItems.addEventListener("click", toggleComplete);
-allTodoItems.addEventListener("click", removeTodo);
+allTodoContainers.forEach((container) => container.addEventListener("click", toggleComplete));
+allTodoContainers.forEach((container) => container.addEventListener("click", removeTodo));
 todoInput.addEventListener("keydown", addTodo);
 addBtn.addEventListener("click", addTodo);
 viewOptions.addEventListener("click", switchContainers);
-
-console.log(TodoModule.todoList);
