@@ -1,3 +1,6 @@
+//imports
+import { TodoModule } from "/TodoModule.js";
+
 //Dom Elements
 const html = document.documentElement;
 const themeBtn = document.querySelector(".toggle-btn");
@@ -35,6 +38,7 @@ function removeTodo(e) {
   const todoItemRemoveBtn = e.target.closest(".remove");
   if (todoItemRemoveBtn) {
     deleteItem(todoItemRemoveBtn.parentElement);
+    TodoModule.remove(e.target.parentElement.id);
     toggleEmptyDisplay();
   }
 }
@@ -43,14 +47,13 @@ function removeTodo(e) {
 function toggleComplete(e) {
   const checkbtn = e.target.closest(".circle");
   if (checkbtn) {
-    console.log(e.target.parentElement);
+    TodoModule.changeStatus(checkbtn.parentElement.id);
     const computedStyle = window.getComputedStyle(checkbtn.children[0]);
     const displayValue = computedStyle.getPropertyValue("display");
     if (displayValue == "inline") {
       checkbtn.children[0].style.display = "none";
     } else {
       checkbtn.children[0].style.display = "inline";
-      completedTodoItems.appendChild(e.target.parentElement);
     }
     checkbtn.parentElement.classList.toggle("strike-todo");
   }
@@ -58,7 +61,11 @@ function toggleComplete(e) {
 // Takes input from the user to create a todo item, which is then added to the todo item list
 function addTodo(e) {
   if ((e.key === "Enter" || e.keyCode === 13 || e.target.id == "add-btn") && todoInput.value != "") {
+    // add created todoItem to the list in TodoModule
+    const todoItem = TodoModule.append(todoInput.value);
+    //create todoItem element for the DOM
     let newTodoItem = document.createElement("li");
+    newTodoItem.id = todoItem.id;
     let circle = document.createElement("span");
     circle.classList.add("circle");
     let checkImage = document.createElement("img");
@@ -111,14 +118,64 @@ function switchContainers(e) {
     });
     addActive(e.target);
     const container = document.querySelector(`.${e.target.id}`);
+    containerSwitchTodoItems(container);
     container.classList.toggle("showDisplay");
+  }
+}
+
+function containerSwitchTodoItems(container) {
+  switch (true) {
+    case container.classList.contains("all"):
+      activeTodoItems.querySelectorAll("li").forEach((item) => allTodoItems.appendChild(item));
+      completedTodoItems.querySelectorAll("li").forEach((item) => allTodoItems.appendChild(item));
+      console.log(TodoModule.todoList);
+      break;
+    case container.classList.contains("active"):
+      const activeIds = TodoModule.activeTodoIds();
+      allTodoItems.querySelectorAll("li").forEach((item) => {
+        if (activeIds.includes(Number(item.id))) {
+          console.log("activeIds", activeIds);
+          activeTodoItems.appendChild(item);
+        }
+      });
+      completedTodoItems.querySelectorAll("li").forEach((item) => {
+        if (activeIds.includes(Number(item.id))) {
+          console.log("activeIds", activeIds);
+          activeTodoItems.appendChild(item);
+        }
+        console.log(TodoModule.todoList);
+      });
+      break;
+    case container.classList.contains("completed"):
+      const completedIds = TodoModule.completedTodoIds();
+      allTodoItems.querySelectorAll("li").forEach((item) => {
+        if (completedIds.includes(Number(item.id))) {
+          console.log("CompletedIds", completedIds);
+          completedTodoItems.appendChild(item);
+        }
+        console.log(" ");
+        console.log(TodoModule.todoList);
+      });
+      activeTodoItems.querySelectorAll("li").forEach((item) => {
+        if (completedIds.includes(Number(item.id))) {
+          console.log("CompletedIds", completedIds);
+          completedTodoItems.appendChild(item);
+        }
+        console.log(" ");
+        console.log(TodoModule.todoList);
+      });
+      break;
   }
 }
 
 //Event Listeners
 themeBtn.addEventListener("click", toggleThemes);
 allTodoItems.addEventListener("click", toggleComplete);
+activeTodoItems.addEventListener("click", toggleComplete);
+completedTodoItems.addEventListener("click", toggleComplete);
 allTodoItems.addEventListener("click", removeTodo);
 todoInput.addEventListener("keydown", addTodo);
 addBtn.addEventListener("click", addTodo);
 viewOptions.addEventListener("click", switchContainers);
+
+console.log(TodoModule.todoList);
