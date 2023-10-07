@@ -12,6 +12,7 @@ const todoInput = document.querySelector("#ToDoItem");
 const addBtn = document.getElementById("add-btn");
 const emptyList = document.querySelector(".emptyList");
 const viewOptions = document.querySelector(".view-options");
+const todosLeft = document.querySelector("#items-left");
 
 //Functions
 function toggleThemes(e) {
@@ -39,7 +40,8 @@ function removeTodo(e) {
   const todoItemRemoveBtn = e.target.closest(".remove");
   if (todoItemRemoveBtn) {
     deleteItem(todoItemRemoveBtn.parentElement);
-    TodoModule.remove(e.target.parentElement.id);
+    TodoModule.remove(todoItemRemoveBtn.parentElement.id);
+    updateTodosLeft();
     toggleEmptyDisplay();
   }
 }
@@ -57,6 +59,7 @@ function toggleComplete(e) {
       checkbtn.children[0].style.display = "inline";
     }
     checkbtn.parentElement.classList.toggle("strike-todo");
+    updateTodosLeft();
   }
 }
 // Takes input from the user to create a todo item, which is then added to the todo item list
@@ -87,6 +90,7 @@ function addTodo(e) {
     allTodoItems.appendChild(newTodoItem);
     toggleEmptyDisplay();
     todoInput.value = ""; // clears the input for the todo item
+    updateTodosLeft();
   }
 }
 
@@ -108,6 +112,11 @@ function addActive(selection) {
     btn.classList.remove("active");
   });
   selection.classList.add("active");
+}
+
+//update the todos left to complete
+function updateTodosLeft() {
+  todosLeft.textContent = TodoModule.activeTodos();
 }
 
 //switch todolist containers
@@ -146,6 +155,8 @@ function containerSwitchTodoItems(container) {
           }
         })
       );
+      TodoModule.activeTodos();
+      TodoModule.activeTodoIds();
       break;
     case container.classList.contains("completed"):
       const completedIds = TodoModule.completedTodoIds();

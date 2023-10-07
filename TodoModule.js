@@ -30,13 +30,12 @@ export const TodoModule = (function () {
     const todoItem = todoList.find((todo) => todo.id == id);
     if (todoItem) {
       todoItem.toggleCompleted();
-      console.log(todoList);
       updateLocalStorage();
     }
   }
 
   function activeTodos() {
-    //refactor this
+    return activeTodoIds().length;
   }
   // remove todoItem from the lists by utilizing the todoItem id
   function remove(id) {
@@ -66,10 +65,9 @@ export const TodoModule = (function () {
     append,
     remove,
     changeStatus,
-    activeTodos,
     removeCompleted,
     activeTodoIds,
     completedTodoIds,
-    todoList,
+    activeTodos,
   };
 })();
