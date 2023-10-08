@@ -1,5 +1,5 @@
 //imports
-import { TodoModule } from "/TodoModule.js";
+import { TodoModule } from "./TodoModule.js";
 
 //Dom Elements
 const html = document.documentElement;
