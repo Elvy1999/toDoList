@@ -10,6 +10,9 @@ export const TodoModule = (function () {
       this.completed = !this.completed;
     }
   }
+  let todoList;
+  let counter;
+
   const deafualtTodoList = [
     { task: "Go to the gym", completed: false, id: 1 },
     { task: "Cook a healthy dinner", completed: false, id: 2 },
@@ -21,11 +24,14 @@ export const TodoModule = (function () {
   });
 
   //populates the todolist with TodoItem objects
-  let todoList = JSON.parse(localStorage.getItem("todoList")).map((todo) => {
-    return new TodoItem(...Object.values(todo)); // destructors the values in todo and passes them
-    // as arguments, in order, to the new TodoItem instance
-  });
-  let counter = JSON.parse(localStorage.getItem("counter"));
+  if (localStorage.getItem("todoList") != null) {
+    todoList = JSON.parse(localStorage.getItem("todoList")).map((todo) => {
+      // destructors the values in todo and passes them
+      // as arguments, in order, to the new TodoItem instance
+      return new TodoItem(...Object.values(todo));
+    });
+    counter = JSON.parse(localStorage.getItem("counter"));
+  }
   if (!todoList || todoList.length === 0) {
     todoList = deafualtTodoList;
     counter = 6;
