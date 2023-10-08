@@ -10,21 +10,29 @@ export const TodoModule = (function () {
       this.completed = !this.completed;
     }
   }
-  const listItem1 = new TodoItem("Go to the gym", false, 1);
-  let todoList = JSON.parse(localStorage.getItem("todoList")).map((todo) => {
+  const deafualtTodoList = [
+    { task: "Go to the gym", completed: false, id: 1 },
+    { task: "Cook a healthy dinner", completed: false, id: 2 },
+    { task: "Finish math homework", completed: true, id: 3 },
+    { task: "Go for a 20 min jog", completed: false, id: 4 },
+    { task: "Read for one hour", completed: true, id: 5 },
+  ].map((todo) => {
     return new TodoItem(...Object.values(todo));
+  });
+
+  //populates the todolist with TodoItem objects
+  let todoList = JSON.parse(localStorage.getItem("todoList")).map((todo) => {
+    return new TodoItem(...Object.values(todo)); // destructors the values in todo and passes them
+    // as arguments, in order, to the new TodoItem instance
   });
   let counter = JSON.parse(localStorage.getItem("counter"));
   if (!todoList || todoList.length === 0) {
-    todoList = [listItem1];
-    counter = 2;
+    todoList = deafualtTodoList;
+    counter = 6;
   }
   //updates the local storage with the values of the three todoItem arrays and the counter
   function updateLocalStorage() {
     localStorage.setItem("todoList", JSON.stringify(todoList));
-    if (todoList.length == 0) {
-      counter = 2;
-    }
     localStorage.setItem("counter", JSON.stringify(counter));
   }
   //creates a TodoItem object and appends it to the todoList and the activeList
@@ -89,6 +97,5 @@ export const TodoModule = (function () {
     activeTodos,
     todoListLength,
     getTodoList,
-    updateLocalStorage,
   };
 })();

@@ -50,14 +50,17 @@ function removeTodo(e) {
 
 //remove completed todoItems from the array and screen
 function clearCompletedTodos() {
-  const completedIds = TodoModule.completedTodoIds();
-  const container = allTodoItems.classList.contains("showDisplay") ? completedTodoItems : allTodoItems;
-  container.querySelectorAll("li").forEach((todo) => {
-    if (completedIds.includes(Number(todo.id))) {
-      deleteItem(todo);
-    }
-  });
-  TodoModule.removeCompleted();
+  if (activeTodoItems.classList.contains("showDisplay")) {
+    const completedIds = TodoModule.completedTodoIds();
+    const container = allTodoItems.classList.contains("showDisplay") ? completedTodoItems : allTodoItems;
+    container.querySelectorAll("li").forEach((todo) => {
+      if (completedIds.includes(Number(todo.id))) {
+        deleteItem(todo);
+      }
+    });
+    TodoModule.removeCompleted();
+    toggleEmptyDisplay();
+  }
 }
 
 // toggle checkmark for list item
@@ -107,7 +110,6 @@ function initialTodoAdd(todoItem) {
   removeBtn.appendChild(crossImg);
   newTodoItem.appendChild(removeBtn);
   allTodoItems.appendChild(newTodoItem);
-  TodoModule.updateLocalStorage();
   updateTodosLeft();
 }
 // Takes input from the user to create a todo item, which is then added to the todo item list
@@ -135,7 +137,9 @@ function addTodo(e) {
     crossImg.src = "assets/icon-cross.svg";
     removeBtn.appendChild(crossImg);
     newTodoItem.appendChild(removeBtn);
-    allTodoItems.appendChild(newTodoItem);
+    activeTodoItems.classList.contains("showDisplay")
+      ? allTodoItems.appendChild(newTodoItem)
+      : activeTodoItems.appendChild(newTodoItem);
     toggleEmptyDisplay();
     todoInput.value = ""; // clears the input for the todo item
     updateTodosLeft();
@@ -144,12 +148,19 @@ function addTodo(e) {
 
 //toggles emptylist display depending on whether todolist is empty or not
 function toggleEmptyDisplay() {
-  if (allTodoItems.childElementCount - 1 == 0 && emptyList.classList.contains("showDisplay")) {
+  console.log("Im here");
+  const selectedContainer = Array.from(allTodoContainers).filter((container) => {
+    return !container.classList.contains("showDisplay");
+  })[0];
+  console.log(selectedContainer);
+  console.log(TodoModule.todoListLength());
+  if (TodoModule.todoListLength() == 0 && emptyList.classList.contains("showDisplay")) {
+    emptyList.classList.toggle("showDisplay");
+    selectedContainer.classList.toggle("showDisplay");
+  } else if (!emptyList.classList.contains("showDisplay") && TodoModule.todoListLength() == 1) {
     emptyList.classList.toggle("showDisplay");
     allTodoItems.classList.toggle("showDisplay");
-  } else if (!emptyList.classList.contains("showDisplay") && allTodoItems.childElementCount == 1) {
-    emptyList.classList.toggle("showDisplay");
-    allTodoItems.classList.toggle("showDisplay");
+    addActive(viewOptions.querySelector("#all"));
   }
 }
 
