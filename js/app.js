@@ -88,7 +88,6 @@ function populateTodoList() {
 
 function initialTodoAdd(todoItem) {
   const { task, completed, id } = todoItem;
-  console.log(task, completed, id);
   let newTodoItem = document.createElement("li");
   newTodoItem.id = id;
   let circle = document.createElement("span");
@@ -148,12 +147,9 @@ function addTodo(e) {
 
 //toggles emptylist display depending on whether todolist is empty or not
 function toggleEmptyDisplay() {
-  console.log("Im here");
   const selectedContainer = Array.from(allTodoContainers).filter((container) => {
     return !container.classList.contains("showDisplay");
   })[0];
-  console.log(selectedContainer);
-  console.log(TodoModule.todoListLength());
   if (TodoModule.todoListLength() == 0 && emptyList.classList.contains("showDisplay")) {
     emptyList.classList.toggle("showDisplay");
     selectedContainer.classList.toggle("showDisplay");
