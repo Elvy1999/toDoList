@@ -1,7 +1,4 @@
 export const TodoModule = (function () {
-  let todoList = JSON.parse(localStorage.getItem("todoList")) || [];
-  let counter = JSON.parse(localStorage.getItem("counter")) || 1;
-
   class TodoItem {
     constructor(task, completed = false, id) {
       this.task = task;
@@ -13,9 +10,19 @@ export const TodoModule = (function () {
       this.completed = !this.completed;
     }
   }
+  const listItem1 = new TodoItem("Go to the gym", false, 1);
+  let todoList = JSON.parse(localStorage.getItem("todoList"));
+  let counter = JSON.parse(localStorage.getItem("counter"));
+  if (!todoList || todoList.length === 0) {
+    todoList = [listItem1];
+    counter = 2;
+  }
   //updates the local storage with the values of the three todoItem arrays and the counter
   function updateLocalStorage() {
     localStorage.setItem("todoList", JSON.stringify(todoList));
+    if (todoList.length == 0) {
+      counter = 2;
+    }
     localStorage.setItem("counter", JSON.stringify(counter));
   }
   //creates a TodoItem object and appends it to the todoList and the activeList
@@ -60,6 +67,15 @@ export const TodoModule = (function () {
   function completedTodoIds() {
     return todoList.filter((todo) => todo.completed == true).map((todo) => todo.id);
   }
+  //returns the length of the todoList array
+  function todoListLength() {
+    return todoList.length;
+  }
+
+  function getTodoList() {
+    //returns a copy of the todolist instead of a refrence to it
+    return [...todoList];
+  }
 
   return {
     append,
@@ -69,5 +85,8 @@ export const TodoModule = (function () {
     activeTodoIds,
     completedTodoIds,
     activeTodos,
+    todoListLength,
+    getTodoList,
+    updateLocalStorage,
   };
 })();

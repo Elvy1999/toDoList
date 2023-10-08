@@ -13,6 +13,7 @@ const addBtn = document.getElementById("add-btn");
 const emptyList = document.querySelector(".emptyList");
 const viewOptions = document.querySelector(".view-options");
 const todosLeft = document.querySelector("#items-left");
+const clearCompletedBtn = document.getElementById("clear-completed");
 
 //Functions
 function toggleThemes(e) {
@@ -27,6 +28,7 @@ function toggleThemes(e) {
     html.dataset.theme = "light";
   }
 }
+
 // animation for when a todo item is deleted
 function deleteItem(element) {
   element.style.opacity = "0";
@@ -46,6 +48,18 @@ function removeTodo(e) {
   }
 }
 
+//remove completed todoItems from the array and screen
+function clearCompletedTodos() {
+  const completedIds = TodoModule.completedTodoIds();
+  const container = allTodoItems.classList.contains("showDisplay") ? completedTodoItems : allTodoItems;
+  container.querySelectorAll("li").forEach((todo) => {
+    if (completedIds.includes(Number(todo.id))) {
+      deleteItem(todo);
+    }
+  });
+  TodoModule.removeCompleted();
+}
+
 // toggle checkmark for list item
 function toggleComplete(e) {
   const checkbtn = e.target.closest(".circle");
@@ -61,6 +75,39 @@ function toggleComplete(e) {
     checkbtn.parentElement.classList.toggle("strike-todo");
     updateTodosLeft();
   }
+}
+//populate todoList with the todoList data from local storage if any exists
+function populateTodoList() {
+  if (true) {
+    TodoModule.getTodoList().forEach((todoItem) => initialTodoAdd(todoItem));
+  }
+}
+
+function initialTodoAdd(todoItem) {
+  const { task, completed, id } = todoItem;
+  console.log(task, completed, id);
+  let newTodoItem = document.createElement("li");
+  newTodoItem.id = id;
+  let circle = document.createElement("span");
+  circle.classList.add("circle");
+  let checkImage = document.createElement("img");
+  checkImage.src = "assets/icon-check.svg";
+  checkImage.style.display = completed == false ? "none" : "inline";
+  circle.appendChild(checkImage);
+  newTodoItem.appendChild(circle);
+  let todo = document.createElement("div");
+  todo.classList.add("todo");
+  todo.innerText = task;
+  newTodoItem.appendChild(todo);
+  let removeBtn = document.createElement("button");
+  removeBtn.classList.add("remove");
+  let crossImg = document.createElement("img");
+  crossImg.src = "assets/icon-cross.svg";
+  removeBtn.appendChild(crossImg);
+  newTodoItem.appendChild(removeBtn);
+  allTodoItems.appendChild(newTodoItem);
+  TodoModule.updateLocalStorage();
+  updateTodosLeft();
 }
 // Takes input from the user to create a todo item, which is then added to the todo item list
 function addTodo(e) {
@@ -174,9 +221,11 @@ function containerSwitchTodoItems(container) {
 }
 
 //Event Listeners
+populateTodoList();
 themeBtn.addEventListener("click", toggleThemes);
 allTodoContainers.forEach((container) => container.addEventListener("click", toggleComplete));
 allTodoContainers.forEach((container) => container.addEventListener("click", removeTodo));
 todoInput.addEventListener("keydown", addTodo);
 addBtn.addEventListener("click", addTodo);
 viewOptions.addEventListener("click", switchContainers);
+clearCompletedBtn.addEventListener("click", clearCompletedTodos);
