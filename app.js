@@ -93,6 +93,7 @@ function initialTodoAdd(todoItem) {
   let checkImage = document.createElement("img");
   checkImage.src = "assets/icon-check.svg";
   checkImage.style.display = completed == false ? "none" : "inline";
+  if (completed) newTodoItem.classList.add("strike-todo");
   circle.appendChild(checkImage);
   newTodoItem.appendChild(circle);
   let todo = document.createElement("div");
