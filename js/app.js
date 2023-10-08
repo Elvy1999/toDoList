@@ -14,6 +14,8 @@ const emptyList = document.querySelector(".emptyList");
 const viewOptions = document.querySelector(".view-options");
 const todosLeft = document.querySelector("#items-left");
 const clearCompletedBtn = document.getElementById("clear-completed");
+const listInfo = document.querySelector(".list-info");
+const moibleSection = document.querySelector(".moible-section");
 
 //Functions
 function toggleThemes(e) {
@@ -228,6 +230,16 @@ function containerSwitchTodoItems(container) {
   }
 }
 
+function changeViewOptionLocation() {
+  if (window.innerWidth >= 900) {
+    viewOptions.style.boxShadow = "none";
+    listInfo.insertBefore(viewOptions, clearCompletedBtn);
+  } else {
+    viewOptions.style.boxShadow = "0px 5px 15px 0px rgba(0, 0, 0, 0.15)";
+    moibleSection.appendChild(viewOptions);
+  }
+}
+
 //Event Listeners
 populateTodoList();
 themeBtn.addEventListener("click", toggleThemes);
@@ -237,3 +249,7 @@ todoInput.addEventListener("keydown", addTodo);
 addBtn.addEventListener("click", addTodo);
 viewOptions.addEventListener("click", switchContainers);
 clearCompletedBtn.addEventListener("click", clearCompletedTodos);
+
+// change the location of viewOptions depending on the size of the screen
+changeViewOptionLocation();
+window.addEventListener("resize", changeViewOptionLocation);

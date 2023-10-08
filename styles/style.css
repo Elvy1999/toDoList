@@ -162,7 +162,7 @@ div.item-wrapper {
 .list-info div,
 .list-info button {
   color: var(--inactive-color);
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 .list-info div:hover,
 .list-info button:hover {
@@ -267,7 +267,7 @@ footer {
   text-align: center;
   color: var(--plus-color);
   position: absolute;
-  bottom: -100px;
+  bottom: 0px;
   height: 2.5rem;
 }
 

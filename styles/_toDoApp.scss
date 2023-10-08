@@ -126,7 +126,7 @@ div.item-wrapper {
   div,
   button {
     color: var(--inactive-color);
-    font-size: 0.8rem;
+    font-size: 1rem;
     &:hover {
       color: var(--hover-color);
       transform: $pop;
@@ -233,7 +233,7 @@ footer {
   text-align: center;
   color: var(--plus-color);
   position: absolute;
-  bottom: -100px;
+  bottom: 0px;
   height: 2.5rem;
 }
 
