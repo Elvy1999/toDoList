@@ -11,7 +11,9 @@ export const TodoModule = (function () {
     }
   }
   const listItem1 = new TodoItem("Go to the gym", false, 1);
-  let todoList = JSON.parse(localStorage.getItem("todoList"));
+  let todoList = JSON.parse(localStorage.getItem("todoList")).map((todo) => {
+    return new TodoItem(...Object.values(todo));
+  });
   let counter = JSON.parse(localStorage.getItem("counter"));
   if (!todoList || todoList.length === 0) {
     todoList = [listItem1];
