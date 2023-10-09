@@ -1,7 +1,7 @@
-//imports
+// imports
 import { TodoModule } from "./TodoModule.js";
 
-//Dom Elements
+// Dom Elements
 const html = document.documentElement;
 const themeBtn = document.querySelector(".toggle-btn");
 const allTodoContainers = document.querySelectorAll(".items");
@@ -17,9 +17,9 @@ const clearCompletedBtn = document.getElementById("clear-completed");
 const listInfo = document.querySelector(".list-info");
 const moibleSection = document.querySelector(".moible-section");
 
-//Functions
+// Functions
 function toggleThemes(e) {
-  const theme = html.dataset.theme;
+  const { theme } = html.dataset;
   if (theme == "light") {
     e.target.src = "assets/icon-sun.svg";
     e.target.alt = "Sun image";
@@ -39,7 +39,7 @@ function deleteItem(element) {
   }, 300); // Wait for the animation duration (in milliseconds)
 }
 
-//removes the todo item when the button with the x image is clicked
+// removes the todo item when the button with the x image is clicked
 function removeTodo(e) {
   const todoItemRemoveBtn = e.target.closest(".remove");
   if (todoItemRemoveBtn) {
@@ -50,7 +50,7 @@ function removeTodo(e) {
   }
 }
 
-//remove completed todoItems from the array and screen
+// remove completed todoItems from the array and screen
 function clearCompletedTodos() {
   if (activeTodoItems.classList.contains("showDisplay")) {
     const completedIds = TodoModule.completedTodoIds();
@@ -81,7 +81,7 @@ function toggleComplete(e) {
     updateTodosLeft();
   }
 }
-//populate todoList with the todoList data from local storage if any exists
+// populate todoList with the todoList data from local storage if any exists
 function populateTodoList() {
   if (true) {
     TodoModule.getTodoList().forEach((todoItem) => initialTodoAdd(todoItem));
@@ -90,23 +90,23 @@ function populateTodoList() {
 
 function initialTodoAdd(todoItem) {
   const { task, completed, id } = todoItem;
-  let newTodoItem = document.createElement("li");
+  const newTodoItem = document.createElement("li");
   newTodoItem.id = id;
-  let circle = document.createElement("span");
+  const circle = document.createElement("span");
   circle.classList.add("circle");
-  let checkImage = document.createElement("img");
+  const checkImage = document.createElement("img");
   checkImage.src = "assets/icon-check.svg";
   checkImage.style.display = completed == false ? "none" : "inline";
   if (completed) newTodoItem.classList.add("strike-todo");
   circle.appendChild(checkImage);
   newTodoItem.appendChild(circle);
-  let todo = document.createElement("div");
+  const todo = document.createElement("div");
   todo.classList.add("todo");
   todo.innerText = task;
   newTodoItem.appendChild(todo);
-  let removeBtn = document.createElement("button");
+  const removeBtn = document.createElement("button");
   removeBtn.classList.add("remove");
-  let crossImg = document.createElement("img");
+  const crossImg = document.createElement("img");
   crossImg.src = "assets/icon-cross.svg";
   removeBtn.appendChild(crossImg);
   newTodoItem.appendChild(removeBtn);
@@ -118,23 +118,23 @@ function addTodo(e) {
   if ((e.key === "Enter" || e.keyCode === 13 || e.target.id == "add-btn") && todoInput.value != "") {
     // add created todoItem to the list in TodoModule
     const todoItem = TodoModule.append(todoInput.value);
-    //create todoItem element for the DOM
-    let newTodoItem = document.createElement("li");
+    // create todoItem element for the DOM
+    const newTodoItem = document.createElement("li");
     newTodoItem.id = todoItem.id;
-    let circle = document.createElement("span");
+    const circle = document.createElement("span");
     circle.classList.add("circle");
-    let checkImage = document.createElement("img");
+    const checkImage = document.createElement("img");
     checkImage.src = "assets/icon-check.svg";
     checkImage.style.display = "none";
     circle.appendChild(checkImage);
     newTodoItem.appendChild(circle);
-    let todo = document.createElement("div");
+    const todo = document.createElement("div");
     todo.classList.add("todo");
     todo.innerText = todoInput.value;
     newTodoItem.appendChild(todo);
-    let removeBtn = document.createElement("button");
+    const removeBtn = document.createElement("button");
     removeBtn.classList.add("remove");
-    let crossImg = document.createElement("img");
+    const crossImg = document.createElement("img");
     crossImg.src = "assets/icon-cross.svg";
     removeBtn.appendChild(crossImg);
     newTodoItem.appendChild(removeBtn);
@@ -147,11 +147,11 @@ function addTodo(e) {
   }
 }
 
-//toggles emptylist display depending on whether todolist is empty or not
+// toggles emptylist display depending on whether todolist is empty or not
 function toggleEmptyDisplay() {
-  const selectedContainer = Array.from(allTodoContainers).filter((container) => {
-    return !container.classList.contains("showDisplay");
-  })[0];
+  const selectedContainer = Array.from(allTodoContainers).filter(
+    (container) => !container.classList.contains("showDisplay")
+  )[0];
   if (TodoModule.todoListLength() == 0 && emptyList.classList.contains("showDisplay")) {
     emptyList.classList.toggle("showDisplay");
     selectedContainer.classList.toggle("showDisplay");
@@ -162,7 +162,7 @@ function toggleEmptyDisplay() {
   }
 }
 
-//add active color to the container option selected
+// add active color to the container option selected
 function addActive(selection) {
   const allBtns = viewOptions.querySelectorAll("button");
   allBtns.forEach((btn) => {
@@ -171,12 +171,12 @@ function addActive(selection) {
   selection.classList.add("active");
 }
 
-//update the todos left to complete
+// update the todos left to complete
 function updateTodosLeft() {
   todosLeft.textContent = TodoModule.activeTodos();
 }
 
-//switch todolist containers
+// switch todolist containers
 function switchContainers(e) {
   if (emptyList.classList.contains("showDisplay") && e.target.tagName == "BUTTON") {
     const allContainers = document.querySelectorAll(".items");
@@ -189,7 +189,7 @@ function switchContainers(e) {
     container.classList.toggle("showDisplay");
   }
 }
-//switch the todoItems between containers
+// switch the todoItems between containers
 function containerSwitchTodoItems(container) {
   // list of the DOM elements for the todoItem containers
   const containers = [allTodoItems, activeTodoItems, completedTodoItems];
@@ -217,7 +217,7 @@ function containerSwitchTodoItems(container) {
       break;
     case container.classList.contains("completed"):
       const completedIds = TodoModule.completedTodoIds();
-      //excludes the completedTodoItems DOM element from the loop
+      // excludes the completedTodoItems DOM element from the loop
       containers.slice(0, 2).forEach((container) => {
         container.querySelectorAll("li").forEach((item) => {
           // adds the todoItem to the container if its id is included in the array of completedIds
@@ -240,7 +240,7 @@ function changeViewOptionLocation() {
   }
 }
 
-//Event Listeners
+// Event Listeners
 populateTodoList();
 themeBtn.addEventListener("click", toggleThemes);
 allTodoContainers.forEach((container) => container.addEventListener("click", toggleComplete));
