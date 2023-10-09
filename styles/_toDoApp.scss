@@ -20,6 +20,7 @@ button {
 }
 
 body {
+  transition: background-image 0.3s ease;
   @include flexcenter;
   background-image: var(--bg-img-mobile);
   background-repeat: no-repeat;

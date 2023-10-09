@@ -231,7 +231,7 @@ function containerSwitchTodoItems(container) {
 }
 
 function changeViewOptionLocation() {
-  if (window.innerWidth >= 900) {
+  if (window.innerWidth >= 950) {
     viewOptions.style.boxShadow = "none";
     listInfo.insertBefore(viewOptions, clearCompletedBtn);
   } else {

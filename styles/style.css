@@ -50,6 +50,7 @@ button {
 }
 
 body {
+  transition: background-image 0.3s ease;
   display: flex;
   justify-content: center;
   align-items: center;
