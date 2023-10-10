@@ -1,7 +1,7 @@
 // imports
 import { TodoModule } from "./TodoModule.js";
 
-// Dom Elements
+// Dom Elementss
 const html = document.documentElement;
 const themeBtn = document.querySelector(".toggle-btn");
 const allTodoContainers = document.querySelectorAll(".items");
