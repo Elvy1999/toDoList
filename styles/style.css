@@ -294,7 +294,7 @@ footer {
   body {
     background-image: var(--bg-img-desktop);
     background-color: var(--bg-color);
-    overflow: hidden;
+    overflow-x: hidden;
   }
   section.wrapper {
     width: 50vw;
