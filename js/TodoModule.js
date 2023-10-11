@@ -16,10 +16,12 @@ export const TodoModule = (function () {
 
   const deafualtTodoList = [
     { task: "Go to the gym", completed: false, id: 1 },
-    { task: "Cook a healthy dinner", completed: false, id: 2 },
-    { task: "Finish math homework", completed: true, id: 3 },
-    { task: "Go for a 20 min jog", completed: false, id: 4 },
-    { task: "Read for one hour", completed: true, id: 5 },
+    { task: "Call Maria", completed: false, id: 2 },
+    { task: "Cook a healthy dinner", completed: false, id: 3 },
+    { task: "Finish math homework", completed: true, id: 4 },
+    { task: "Go for a 20 min jog", completed: false, id: 5 },
+    { task: "Read for one hour", completed: true, id: 6 },
+    { task: "Text Maria", completed: true, id: 7 },
   ].map((todo) => new TodoItem(...Object.values(todo)));
 
   // populates the todolist with TodoItem objects
@@ -34,7 +36,7 @@ export const TodoModule = (function () {
   }
   if (!todoList || todoList.length === 0) {
     todoList = deafualtTodoList;
-    counter = 6;
+    counter = 8;
   }
   // updates the local storage with the values of the three todoItem arrays and the counter
   function updateLocalStorage() {
